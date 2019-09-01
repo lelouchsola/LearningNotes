@@ -16,7 +16,7 @@
         《不确定规划及应用》 by 刘宝碇 <br>
         《Introduction to Operations Research》by S. Hillier 中文《运筹学导论》<br>
          DrSalimian 的线性规划系列视频 https://www.youtube.com/playlist?list=PLUm0dA6802wao5iSrkhnMDSLGu5bg_FtM <br>
-         Non-convex optimization: "Non-convex Optimization for Machine Learning" by Prateek Jain
+         Non-convex optimization: "Non-convex Optimization for Machine Learning" by Prateek Jain <br>
          **Note: The most important thing is how to use mathmatic to describe the problem and build up the corresponding model, but not how to prove those theroms. It is better to learn optimization by using softwares to handle the practical problems.** <br>
     2. Linear algebra: MIT 18.06<br>
     3. Statistics:<br>
