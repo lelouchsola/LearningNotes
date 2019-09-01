@@ -1,6 +1,11 @@
 # Learning Road Map
-<font color=#660066 size=5 face="微软雅黑">**Greeting, this is Lelouchsola's learning road map**</font>
+<font color=#660066 size=4 face="微软雅黑">**Greeting, this is Lelouchsola's learning road map!**</font>
 <br>
+__Note: Github do not support Latex, so the web can not show the formulations in Paper Note markdown files !!!__
+
+__If you want to see my paper note, you can:__
+1. download the .md file to your local space and open it with your local Markdown editor.
+2. click the corresponding .html file and add http://htmlpreview.github.io/? before the web link. For example, the webpage address of Paper note 1 is https://github.com/lelouchsola/LearningNotes/blob/master/Paper1_Notes.html, you can add the link before the address, then the webpage address become: http://htmlpreview.github.io/?https://github.com/lelouchsola/LearningNotes/blob/master/Paper1_Notes.html. 
 <br>
 <font color=#000000 size=3 face="微软雅黑">**Reference route map**</font>
 <br>
