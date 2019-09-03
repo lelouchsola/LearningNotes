@@ -155,4 +155,84 @@ $\overline{f}(x, \varepsilon):=\max \{f_1(x, \varepsilon),...,f_m(x, \varepsilon
 
 __(The mathmatic part is over, next is application part.)__
 #### Applications in power systems
-(to be continued...)
+Pivotal task: maintain the real-time balance of supply and demand while ensuring the system is low-cost and reliable.
+##### Security-constrained economic dispatch(SCED)
+__a. Deterministic SCED:__ no uncertainties.
+Example: direct current optinam power flow (DCOPF)
+$$
+(det-DCOPF): \min \limits_{g} c(g) \\
+s.t \quad 
+1^Tg = 1^Td - 1^T \hat{w} \\
+f = H_{g}g + H_{w}W-H_{d}d \\
+\underline{f} \leq f \leq \overline{f} \\
+\underline{g} \leq g \leq \overline{g}
+$$
+where decision varibles are generation output levels $g \in R^{n_g}$. $c(g)$ is the total generation cost, $1^Td - 1^T \hat{w} $ is net demands, $H$ is power transfer distribution factor (PTDF) matrix, $f$ is transmission line flows, $\hat{w}$ is wind generation.  
+
+__b. Chance-constrained SCED__  
+Treat wind generation $w$ as a random vector.
+$$
+(cc-DCOPF): \min \limits_{g,\eta} c(g) \\
+s.t \quad 
+1^Tg = 1^Td - 1^Tw \\
+f(\hat{w}, \widetilde{w}) = H_{g}(g-1^T \widetilde{w} \eta) -H_{d}d + H_{w}(\hat{w}+\widetilde{w}) \\
+P_{\hat{w}}(\underline{f} \leq f(\hat{w}, \widetilde{w}) \leq \overline{f} \quad and \quad \underline{g} \leq {g-1^T \widetilde{w} \eta} \leq \overline{g}) \geq{1-\epsilon} \\
+1^T \eta = 1 \\
+\underline{g} \leq g \leq \overline{g} \\
+-1 \leq \eta \geq 1
+$$
+where $\eta$ is affine control policy $\eta \in [-1,1]^{n_g}$ (proportionally allocate total wind fluctuations to each generate), it's also called participation factor or dustribution vector.
+
+##### Security-constrained unit commitment(SCUC)
+SCUC is used to minimize the generation cost.  
+__Deterministic SCUC__  
+$
+(det-SCUC):
+\min \limits_{z,u,v,g,s} \sum_{t=1}^{n^t}c_n^T z^t+ c_u^T u^t + c_v^T v^t + c_g^T g^{t,0} + c_s^T s^t \\
+s.t. \quad 1^T g^{t, k} \geq 1^T \hat{d^t} - 1^T \hat{w}^t
+$
+![methods](./images/Paper1/SCUC_Constraints.PNG)
+Objective function is total operation costs, including no-load costs $c_n^T z^t$, startup costs $c_u^T u^t$, shutdown costs $c_v^T v^t$, generation costs $c_g^T g^{t,0}$ and reserve costs $c_s^T s^t$.  
+The first constraint assures enough supply to meet net demand.  
+Constraints (76c), (76d) and (76g) are about transmission capacity, generation ramping capability and reserve limit in contingency scenario k at time t.  
+Constraints (76f) and (76g) are generation and reserve capacity.  
+(76i)-(76j) are logistic constraints about commitment status, startup and shutdown decisions.  
+Constraints (76k)-(76l) are minimum on/off time constraints for all generators.  
+Deterministic SCUC has no uncertain variables
+
+__Chance-constrained SCUC__  
+![methods](./images/Paper1/cc_SCUC_Constraints.PNG)  
+Wind generation os modeled as a random vector consisting of a deterministic predicted component $\hat{w} \in R^{n_w}$ and a stochastic error component $\widetilde{w} \in R^{n_w}$  
+The demand is also treated as a random vector with deterministic component $\hat{d}$ and a stochastic error component $\widetilde{d}$.
+
+__solving chance-constrained SCUC__  
+Sample average approximation is commonly used. There is no upper bound on the number of support scenarios for non-convex problems, so the scenario approach cannot be directly applied on cc-SCUC.
+
+##### Generation and transmission expansion Generation
+__a. Purposes:__
+1. when to invest on new elements such as transmission lines and generators;
+2. what types of new elements are necessary;
+3. how much capacity is needed and where the best location would be for those new elements.
+
+__b. Objective function:__  
+1. total cost of investment in new generators and transmission line;
+2. environmental impacts;
+3. cost of generation.
+
+__c. Constrains:__  
+1. total or individual costs within budget;
+2. capacity constriant;
+3. reliability requirement;
+4. supply-demand balance;
+5. power flow equations;
+6. operation requirements such as generation or transmission limits.
+
+__d. Uncertainties:__
+1. demand;
+2. generation;
+3. transmission outages;
+4. renewables.
+
+
+
+
