@@ -1,7 +1,4 @@
----
-export_on_save:
- html: true
----
+
 # Notes for Paper 1
 ## Paper 1
 ### __Title:__ Data-driven decision making in power systems with probabilistic guarantees: Theory and applications of chance-constrained optimization  

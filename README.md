@@ -5,7 +5,7 @@ __I use this repository to store my notes for books and papers.__
 __I built my own learning road map by referring to the AI-roadmap:__  
 https://github.com/apachecn/ai-roadmap/tree/master/ai-union-201904
 
-##Part I: Mathmatics
+## Part I: Mathmatics
 ### 1. optimization: 
     a.《Convex Optimization: Algorithms and Complexity》
     b.《Optimization Methods for Large-Scale Machine Learning》
