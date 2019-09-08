@@ -1,7 +1,7 @@
 # Notes for "Convex Optimization"
 ## Chapter 2: Convex Set
 ### Affine set
-__Defination:__  
+__Definition:__  
 if $C \in R^n$ is affine set
 $$
 \theta x_1 + (1-\theta)x_2 \in C\\
@@ -10,14 +10,14 @@ $$
 ![AffineSet](./images/Chapter2/AffineSet.PNG)
 
 ### Affine hull
-__Defination:__  
+__Definition:__  
 The set of all affine combinations of points in some set $C \in R^n$.  
 $$
 \mathbf{aff}\quad C = \{\theta_1x_1+...+\theta_kx_k|x_1,...x_k \in C, \theta_1 + ... \theta_k = 1\} 
 $$
 
 ### Convex set
-__Defination:__  
+__Definition:__  
 if $C \in R^n$ is convex set
 $$
 \theta x_1 + (1-\theta)x_2 \in C\\
@@ -27,7 +27,7 @@ The idea of a convex combination can be generalized to include infinite sums.
 ![ConvexSet](./images/Chapter2/ConvexSet.PNG)  
 
 ### Convex hull
-__Defination:__  
+__Definition:__  
 The convex hull of a set $C$ is the set of all convex combinations pf points in $C$.
 $$
 \mathbf{conv}\quad C = \{\theta_1x_1+...+\theta_kx_k|x_i\in C, \theta_i \geq 0,i=1,...k,\theta_1 + ... \theta_k = 1\} 
@@ -35,11 +35,11 @@ $$
 ![ConvexHull](./images/Chapter2/ConvexHull.PNG)
 
 ### Cones
-__Defination:__  
+__Definition:__  
 For every $x \in C$ and $\theta \geq 0$, we have $\theta x \in C$.
 
 ### Convex Cones
-__Defination:__  
+__Definition:__  
 For any $x_1, x_2 \in C$ and $\theta_1,\theta_2 \geq 0$, we have
 $$
 \theta_1 x_1 + \theta_2 x_2 \in C
@@ -47,7 +47,7 @@ $$
 ![ConvexCones](./images/Chapter2/ConvexCones.PNG)
 
 ### Conic hull
-__Defination:__  
+__Definition:__  
 The conic hull of a set $C$ is the set of all conic combinations of points in $C$.
 $$
  \{\theta_1x_1+...+\theta_kx_k|x_i\in C, \theta_i \geq 0,i=1,...k,\} 
@@ -55,7 +55,7 @@ $$
 ![ConicHull](./images/Chapter2/ConicHull.PNG)
 
 ###Hyperplanes
-__Defination:__  
+__Definition:__  
 $$
 \{x|a^Tx=b, a \in R^n, a \neq 0\}
 $$
@@ -66,7 +66,7 @@ $$
 ![Hyperplanes](./images/Chapter2/Hyperplanes.PNG)
 
 ###Halfspace
-__Defination:__
+__Definition:__
 $$
 \{x|a^Tx \leq b, a \in R^n, a \neq 0\}
 $$
@@ -77,7 +77,7 @@ $$
 ![Halfspace](./images/Chapter2/Halfspace.PNG)
 
 ###Euclidean balls and ellipsoids
-__Defination:__  
+__Definition:__  
 A ball in $R^n$ has the form
 $$
 B(x_c,r) = \{x|\parallel x-x_c \parallel_2 \leq r\} = \{x|(x-x_c)^T(x-x_c) \ leq r^2\}
@@ -100,7 +100,7 @@ $A$ is symmetric and positive definite. $A=P^{1/2}$
 ![Ellipsoids](./images/Chapter2/Ellipsoids.PNG)
 
 ### Polyhedra
-__Defination:__  
+__Definition:__  
 A polyhedra is the solution set of a finite number of linear equalities and ineuqalities.
 $$
 \mathbf{P}= \{x|a_j^Tx \leq b_j, j=1,...m, c_j^Tx=d_j,j=1,...p \}
@@ -153,7 +153,7 @@ A cone $K \subseteq R^n$ is called a proper cone if:
 3. $K$ has nonempty interior
 4. $K$ is point (it contains no line)
 
-__Generalized inequality defination__  
+__Generalized inequality Definition__  
 $$
 x \preceq_K y \Leftrightarrow y-x \in K
 $$
