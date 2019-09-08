@@ -1,5 +1,5 @@
 ## Greeting, this is Lelouchsola's learning road map!
-__I use this repository to store my notes for books and papers.__
+__I use this repository to store my notes for books. Note Academic Papers are not included in this road map__.
 
 ## Let's start my learning road map!
 __I built my own learning road map by referring to the AI-roadmap:__  
@@ -17,7 +17,10 @@ https://github.com/apachecn/ai-roadmap/tree/master/ai-union-201904
     g. "Non-convex Optimization for Machine Learning" by Prateek Jain. 
 __Note: The most important thing is how to use mathmatic to describe the problem and build up the corresponding model, but not how to prove those theroms. It is better to learn optimization by using softwares to handle the practical problems.__
 ### 2. Linear algebra: 
-    MIT 18.06 
+    MIT 18.06
+    矩阵求导术: 
+        https://zhuanlan.zhihu.com/p/24709748
+        https://zhuanlan.zhihu.com/p/24863977 
 ### 3. Statistics:
     《An Introduction to Statistical Learning》 https://github.com/JWarmenhoven/ISLR-python
 
@@ -45,7 +48,9 @@ __Note: The most important thing is how to use mathmatic to describe the problem
 ### Part V: Reinforcement Learning
     a. 《Reinforcement Learning : An introduction》  
         https://github.com/ShangtongZhang/reinforcement-learning-an-introduction  
-    b. 强化学习入门 https://www.zhihu.com/question/277325426/answer/411907338  
+    b. 强化学习入门 https://www.zhihu.com/question/277325426/answer/411907338
+    c. 莫烦RL教程 https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/  
+    d. RL学习资料整理 https://www.zhihu.com/question/333671830/answer/745818039
 ### Part VI: Latex
     a. https://www.zhihu.com/question/62943097/answer/203670095
 
