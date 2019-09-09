@@ -193,7 +193,7 @@ If $a \neq 0$ satisfies $a^Tx \leq a^Tx_0$ for $x \in C$, then the hyperplane $\
 ### Dual cones
 $K$ is a cone. The set
 $$
-K^* = \{y|x^Ty \geq 0 for all x \in K\}
+K^* = \{y|x^Ty \geq 0 \quad for \quad all \quad x \in K\}
 $$
 is called the dual cone of $K$. $K^*$ __is always convex even when the cone $K$ is not.__  
 ![ualCones](./images/Chapter2/DualCones.PNG)

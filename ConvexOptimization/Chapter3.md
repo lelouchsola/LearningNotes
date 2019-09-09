@@ -1,5 +1,10 @@
 # Notes for "Convex Optimization"
 ## Chapter 3: Convex Function
+### Summary
+In this chapter, the author first introduces the definition of convex function and its first-, second-order conditions. Then, the concepts of sublevel sets and epigraph are involved, which are the useful tool to judge the function convexity. An important inequlity "Jensen's inequality" is derived. 
+Secondly, the author introduces some kinds of operations which can preserve the functions' convexity, including Nonnegative weighted sums, Composition with an affine mapping, Pointwise maximum and supremum, Composition, and Perspective of a function. 
+Thirdly, the author extends the convex funtion into some other functions, such as the conjugate function, Quasiconvex function, and log-concave and log-convex functions. The basic definitions, determination condition, and properties are descibed.
+Finally, the author introduces the convexity of generalized inequalities, which extends the scalar function ($f: R^n \rightarrow R$) into vector function ($f: R^n \rightarrow R^p$).
 ### Convex Function Definition
 A function: $f:R^n \rightarrow R$ is convex if $\mathbf{dom}f$ is convex set and if for all $x, y \in \mathbf{dom}f$, and $\theta$ with $0 \leq \theta \leq 1$, we have
 $$
@@ -150,6 +155,72 @@ $$
 ![FirstorderQuasiconvex](./images/Chapter3/FirstorderQuasiconvex.PNG)
 Proof: https://blog.csdn.net/wang136958280/article/details/86549034
 
+__Second-order conditions:__  
+Suppose $f$ is twice differentiable. If $f$ is quasiconvex, then for all $x \in \mathbf{dom} f$ and all $y \in R^n$, we have
+$$
+y^T \nabla f(x)=0 \Rightarrow y^T \nabla^2 f(x) y \geq 0
+$$
 
+#### Operations that preserve quasiconvexity
+__1. Nonnegative weighted maximum__  
+$$f = \max \{w_1f_1,...,w_mf_m\}$$
+$$f(x)=\sup \limits_{y \in C}(w(y)g(x,y))$$
+__2. Composition__  
+If $g:R^n \rightarrow R$ is quasiconvex and $h:R \rightarrow R$ is nondecreasing, then $f=h(g(x))$ is quasiconvex.  
+If $f$ is quasiconvex, then $g(x)=f(Ax+b)$ is quasiconvex.  
+__3.Minimization__  
+If $f(x,y)$ is quasiconvex jointly in $x$ and $y$ and $C$ is a convex setm then the function
+$$g(x)= \inf \limits_{y \in C} f(x,y)$$ is quasiconvex.
 
+### log-concave and log-convex functions
+#### 1. Definition
+A function $f:R^n \rightarrow R$ is logarithmically concave or log-concave if $f(x)>0$ for all $x \in \mathbf{dom}f$ and $\log f$ is concave.  
+$f$ is log-convex if and only if $1/f$ is log-concave.  
+A function $f: R^n \rightarrow R$ with convex domain and $f(x)>0$ for all $x \in \mathbf{dom}f$, is log-concave if and only if for all $x,y \in \mathbf{dom} f$ and $0 \leq \theta \leq 1$, we have
+$$f(\theta x +(1-\theta)y) \geq f(x)^\theta f(y)^{1-\theta}$$
+#### 2. Properties
+__Twice differentiable log-convex/concave functions__  
+$f$ is log-convex if and only if for all $x \in \mathbf{dom} f$
+$$f(x) \nabla^2 f(x) \succeq \nabla f(x) \nabla f(x)^T$$ and log-concave if and only if for all $x \in \mathbf{dom}f$
+$$f(x) \nabla^2 f(x) \preceq \nabla f(x) \nabla f(x)^T$$
+Log-convexity and log-concavity are closed under multiplication and positive scaling.  
+__Integration of log-concave functions__  
+If $f:R^n \times R^m \rightarrow R$ is log-concave, then
+$$g(x)=\int f(x,y)dy$$ is a log-concave function of x(on $R^n$).  
+If $f$ and $g$ are log-concave on $R^n$, then so is the convolution
+$$(f*g)(x)=\int f(x-y)g(y)dy$$
+
+### Convexity with respect to generalized inequalities
+#### 1. Monotonicity
+Suppose $K \subseteq R^n$ is a proper cone with associated generalized inequality $\preceq_K$. A function $f: R^n \rightarrow R$ is called K-nondecreasing if
+$$x \preceq_K y \Rightarrow f(x) \leq f(y)$$ and K-increasing if
+$$x \preceq_K y, x \neq y \Rightarrow f(x) < f(y)$$
+
+A dfifferentiable function $f$ with convex domain, is K-nondecreasing if and only if 
+$$\nabla f(x) \succeq_{K^*}0$$
+For all $x \in \mathbf{dom} f$,  $f$ is K-increasing if
+$$\nabla f(x) \succ_{K^*}0$$
+
+#### Convexity with respect to a generalized inequality
+Suppose $K \subseteq R^m$ is a proper cone with associated generalized inequality $\preceq_K$. We say $f:R^n \rightarrow R^m$ is K-convex if for all $x,y$ and $0 \leq \theta \leq 1$,
+$$f(\theta x + (1-\theta)y \preceq_K \theta f(x) + (1-\theta)f(y) $$.
+The function is strictly K-convex if
+$$f(\theta x + (1-\theta)y \prec_K \theta f(x) + (1-\theta)f(y) $$ for all $x \neq y$ and $0 \leq \theta \leq 1$
+
+__Dual characterization__  
+A function $f$ is K-convex if and only if for every $w \succeq_{K^*} 0$, the function $w^T f$ is convex.  
+__Differentiable K-convex function__  
+A differentiable function $f$ is K-convex if and only if its domain is convex, and for all $x,y \in \mathbf{dom} f$
+$$f(y) \succeq_K f(x)+Df(x)(y-x)$$ Here $Df(x) \in R^{m \times n}$ is the derivative or Jacobian matrix of $f$ at $x$.
+__Composition theorem__  
+If $g:R^n \rightarrow R^p$ is convex, $h:R^p \rightarrow R$ is convex, and $\widetilde{h}$ is K-nondecreasing, then $h(g(x))$ is convex.
+Example:
+$g:R^{m \times n} \rightarrow S^n$ defined by
+$$g(X)=X^TAX+B^T+X^TB+C$$ where $A \in S^m, B \in R^{m \times n}$ and $C \in S^n$ is convex when $A \succeq 0$.
+The function $h:S^n \rightarrow R$ defined by $h(Y) = -\log \det (-Y)$ is convex and increasing on ${\mathbf{h}}=-S^n_{++}$.
+Then $$f(X)=-\log \det (-(X^TAX+B^T+X^TB+C))$$ is convex on 
+$$\mathbf{dom}f=\{X\in R^{m \times n}|X^TAX+B^T+X^TB+C \prec0\}$$
+This generalizes the fact that 
+$$-log(-(ax^2+bx+c))$$ is convex on 
+$$\{x \in R|ax^2+bx+c \in 0\}$$ provided $a\geq 0$
 
