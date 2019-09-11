@@ -62,7 +62,7 @@ $$
 A function is convex if and only if its epigraph is convex set.
 
 ### Jensen's inequality and extensions
-If $f$ is convex, $x_1,..., x_k \in \mathbf{dom}f$, and $\theta_1,...,\theta_k \leq 0$ with $\theta_1 +...+\theta_k =1$, then
+If $f$ is convex, $x_1,..., x_k \in \mathbf{dom}f$, and $\theta_1,...,\theta_k \geq 0$ with $\theta_1 +...+\theta_k =1$, then
 $$
 f(\theta_1 x_1+...+\theta_k x_k) \leq \theta_1 f(x_1)+...+\theta_k f(x_k)
 $$
