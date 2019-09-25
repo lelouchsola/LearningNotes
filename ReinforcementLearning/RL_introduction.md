@@ -171,3 +171,59 @@ self.eligibility_trace.ix[s, a] += 1
 self.eligibility_trace.ix[s, :] *= 0
 self.eligibility_trace.ix[s, a] = 1
 ```
+
+### 5. Deep Q Network (DQN)
+A very useful link: DQN从入门到放弃  
+https://zhuanlan.zhihu.com/p/21547911
+#### 5.1 Introduction
+Neural networks + Q learning  
+__Why?__ If the state number is too large (each state may correspond to a lot of actions), it is hard to store the whole Q table in memory, and it may take huge time to search the given Q value in such a large table.
+Instead, DQN use neural networks (NN) to generate $Q(s,a)$ directly (state and action are input variables), or we can give a state to NN, then NN will output all the possible actions and the corresponding Q values, then Q learning will choose the best action. 
+![DQN](./images/MorvalTutorials/DQN.png)
+
+#### 5.2 Algorithm
+![DQN_algorithm](./images/MorvalTutorials/DQN_algorithm.jpg)
+Compared with Q learning, DQN adds a memory D to store the experience, and it uses NN to calculate Q value.
+#### 5.2 Training NN
+There are two NN in DQN (Experience replay):  
+1. target net, used to calculate the target Q value $Q(s')$. Parameters (weights) in target will be fixed for a time then it will be replaced by eval net's weights. Target network can not be trained.
+2. eval net, used to calculate evaluated Q value $Q(s_2)$, it will be trained continuously.
+![DQN_NN](./images/MorvalTutorials/DQN_NN.png)
+
+__Why two NN?__  
+原来NIPS版本的DQN目标Q网络是动态变化的，跟着Q网络的更新而变化，这样不利于计算目标Q值，导致目标Q值和当前的Q值相关性较大。因此提出单独使用一个目标Q网络。那么目标Q网络的参数如何来呢？还是从Q网络中来，只不过是延迟更新。也就是每次等训练了一段时间再将当前Q网络的参数值复制给目标Q网络.  
+
+### 6. Policy Gradients
+Unlike Q learning, the output of policy gradients is action. The greatest benefit is that it can select action from a continuous intervel, while Q learning can only choose action from a set of discrete actions.
+#### 6.1 Algorithm
+![PolicyGradients](./images/MorvalTutorials/PolicyGradients.png)
+where $\pi_{\theta}(s_t, a_t)$ represents the likehood function of policy of action $a_t$ at state $s_t$.  
+https://blog.csdn.net/achuo/article/details/51160101  
+$v_t$ is the "score" of action, if $v_t$ is small or negetive, it means that the direction of policy gradient descent is wrong, we need to update our parameters in another direction.
+![vt](./images/MorvalTutorials/vt_PolicyGradients.png)
+
+
+### 7. Actor Critic 
+#### 7.1 Why Actor Critic?
+Q-learning can not handle the problems with continuous actions, and policy gradients updates every episode, which decreases the learning rate (it will take a long time to converge).  
+Actor critic combines Q-learning and policy gradients.  
+#### 7.2 What is Actor Critic?
+There are two systems in Actor Critic
+Actor -- Policy Gradients, to deal with the continuous actions, output is action.  
+Critic -- Value-Based (Q-learning), to accelerate aonvergence with updating in every step, input is the action provided by Actor, output is the corresponding value of the input action.  
+However, because of the correlations of the parameters before and after updating, the NN can only be trained with bias.
+#### 7.3 Improvement
+__Deep Deterministic Policy Gradient (DDPG)__  
+DDPG combines the DQN with actor.  
+Update actor:
+![DDPG_actor](./images/MorvalTutorials/DDPG_actor.png)
+The first part $\nabla_aQ$ comes from the Critic part, which means how should we move so that we can get the larger value (如何选择action,才能获得更大的Q). The second part is from actor, which means how should we change our parameters to let this action more likely occurs (如何修改参数使得该动作更有可能发生).  
+Update critic:
+![DDPG_critic](./images/MorvalTutorials/DDPG_critic.png)
+This comes from DQN. Two NNs employed, eval_net is used to update the parameters and target_net is used to output the target Q value. The parameters in target_net will be replaced by those in eval_net after special number of steps. 
+![DDPG_structure](./images/MorvalTutorials/DDPG_structure.png)
+
+__Asynchronous Advantage Actor-Critic (A3C)__  
+A3C creates multiple agents, those agents will update their parameters parallelly and send their updated parameters to the global network. The global network will update its own parameters according to the parameters from agents. After that, agents will copy parameters from global network then start the next update.
+![A3C](./images/MorvalTutorials/A3C.png)
+A3C can performs by multithreading, which can accelerate convergence. In addition, A3C can break the high correlation bewteen continuous updating by one single agent because the multiple agents are independed.
