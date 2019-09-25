@@ -15,6 +15,9 @@ https://github.com/apachecn/ai-roadmap/tree/master/ai-union-201904
     f. DrSalimian 的线性规划系列视频 
         https://www.youtube.com/playlist?list=PLUm0dA6802wao5iSrkhnMDSLGu5bg_FtM 
     g. "Non-convex Optimization for Machine Learning" by Prateek Jain. 
+    h. lectures on stochastic programming, by A Shapiro
+    i. Robust Optimization, by Aharon Ben-Tal
+
 __Note: The most important thing is how to use mathmatic to describe the problem and build up the corresponding model, but not how to prove those theroms. It is better to learn optimization by using softwares to handle the practical problems.__
 ### 2. Linear algebra: 
     MIT 18.06
@@ -38,7 +41,7 @@ __Note: The most important thing is how to use mathmatic to describe the problem
 ### Part IV: Deep Learning
     a. 《Deep Learning》 on Coursera  
         exercies https://github.com/stormstone/deeplearning.ai  
-    b. 《Deep Learning》 花书  
+    b. 《Deep Learning》 https://github.com/zsdonghao/deep-learning-book 
     c.  PyTorch官方文档 https://pytorch.apachecn.org/docs/1.0/  
     d. 深度学习入门 https://www.zhihu.com/question/26006703/answer/536169538  
     e. CS231N or fast.ai Course  
@@ -51,6 +54,7 @@ __Note: The most important thing is how to use mathmatic to describe the problem
     b. 强化学习入门 https://www.zhihu.com/question/277325426/answer/411907338
     c. 莫烦RL教程 https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/  
     d. RL学习资料整理 https://www.zhihu.com/question/333671830/answer/745818039
+    e. CS294-112 (CS285) UCB http://rail.eecs.berkeley.edu/deeprlcourse/
 ### Part VI: Latex
     a. https://www.zhihu.com/question/62943097/answer/203670095
 
