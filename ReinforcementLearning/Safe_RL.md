@@ -28,6 +28,31 @@ $
 
 # Safe Reinforcement Learning for cyber-physical systems (CPS)
 ## This paragraph is based on the paper "Safe AI for CPS" by Nathan Fulton from CMU
-### Definition
+### Problem
+Achieving efficiency, safety, comfort automation of vehiecles required increasing the size and complexity of software. Today's self-driving cars have __become so complex that it is completely infeasible to establish safety by testing.__  
+Developers should construct a model of the system under control __then write a formal proof__ that their model satisfies key safety properties.
+### Formal satety proofs
+#### 1. Verification of model-based controllers
+Low-level controllers are designed with respect to a set of differential equations that model the environment. The lowest level of the controls & planning software stack uses the current state to choose actuator inputs.  
+Hybrid programs are used to captures the essence of how computation and physics interact in control systems.  
 
+#### 2. VERIFIED MODEL-BASED LOCAL MOTION PLANNING
+Differential dynamic logic ($dL$) is a logic for specifying and proving properties of hybrid programs.  
+Model-based local motion planning takes as input a high-level (a left-hand turn etc.)but local goal and produces as output a set of inputs to the low-level control software __without violating system safety constraints.__
+##### a. Verifiably Safe Reinforcement Learning
+Justified Speculative Control (JSC) uses $dL$ safety specifications to obtain safety guarantees for policies obtained via reinforcement learning.  
+__JSC uses runtime monitors to constrain the set of available actions.__ If the environmental model is accurate according to a runtime monitor MM for the model, then the learning agent may only select actions that the controller runtime monitor CM designates as proven safe.  
+When the model monitor MM is false, we use a quantified version of the original model monitor MM, effectively __rewarding the system for minimizing the error between the model’s prediction of what should have happened and the sensor’s observations of what actually happened.__ This was experimentally observed to have the effect of __driving the agent back into known safe portions of the state space__ quickly.  
+JSC uses verified monitors to extend verification results about low-level control software to learned behaviors for achieving high-level but local goals.
+##### b. MODEL-BASED BEHAVIORAL DECISION MAKING
+The next level up in the autonomous vehicle software stack tackles the problem of choosing and switching between multiple available behavioral models (not local goals).  
+The µ-learning algorithm extends formal safety guarantees from the local planning layer to the behavioral layer by combining verified reinforcement learning with online falsification to choose among a set of possible behavioral models.  
+Standard µ-learning assumes that a distinguished accurate model $m∗$ already is in the monitored models M. This paper introduced two ways to relax the assumption.  
+1. A verification-preserving model up-date (VPMU) is a pair of mappings modelUpdate and proofUpdate which take as input an initial dL formula ϕ with an associated Bellerophon proof e of ϕ, and produce as output a new dL formula modelUpdate(ϕ) and a proof proofUpdate(e) of modelUpdate(ϕ).
+2. Consider model updates that are not verification preserving. Switching to an unverified model should only happen as a last resort when there is no available verified model that accurately characterizes observed reality.
+### Future Work
+1. providing safety and optimality guarantees for continuous state and action spaces
+2. providing safety and optimality guarantees outside of model space
+3. extending approaches that provide unverified formal constraints with formal mechanized proofs that action constraints are safe with respect to the environmental model
+4. incorporating formal guarantees for learning into verified pipelines
 
