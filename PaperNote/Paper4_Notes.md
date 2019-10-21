@@ -1,4 +1,4 @@
-# Notes for Paper 3
+# Notes for Paper 4
 ### Title:Convex relaxation of optimal power flow—Part I: Formulations and equivalence 
 ### Authors:Low S H.
 ### Journal:IEEE Transactions on Control of Network Systems 
