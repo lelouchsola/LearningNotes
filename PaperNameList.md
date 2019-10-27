@@ -7,3 +7,4 @@
 3. Jordehi, A. Rezaee. "Optimisation of demand response in electric power systems, a review." Renewable and Sustainable Energy Reviews 103 (2019): 308-319.
 4. Low S H. Convex relaxation of optimal power flow—Part I: Formulations and equivalence[J]. IEEE Transactions on Control of Network Systems, 2014, 1(1): 15-27.
 5. Afroz, Zakia, et al. "Modeling techniques used in building HVAC control systems: A review." Renewable and Sustainable Energy Reviews 83 (2018): 64-84.
+6. Afram, Abdul, et al. "Artificial neural network (ANN) based model predictive control (MPC) and optimization of HVAC systems: A state of the art review and case study of a residential HVAC system." Energy and Buildings 141 (2017): 96-113.
