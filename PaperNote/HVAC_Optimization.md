@@ -67,7 +67,7 @@ __Algorithms:__
 再根据set of times instants估计上述等式右边两项的值，从而计算出上述偏微分的值。其中$\gamma_{k_e,k_a}$为当event $k_e$发生时，系统采用action $a(k_a)$的概率
 3. 更新policy（其实这步就是在选择action）.  
 ![policy_improvement1.png](./images/HVAC_Optimization_Survey/policy_improvement1.png) 
-4. 判断是否收敛（j代表迭代次数）
+4. 判断是否收敛（j代表迭代次数） 
 
 __Advantages:__  
 1. local event-based policy can reduce the event number, which can be applied to large-scale problems.
@@ -79,7 +79,61 @@ near-optimal solution
 2. it didn't give the distance between the near-optimal solution and the optimal solution.
 3. only control the off/on of HVAC system in each room, but not temperature. As a result, there is no constaint for variables.
 
-#### 2.1.2 Hamilton-Jacobi-Bellman (HJB) equation [2-5]
+
+
+#### 2.1.2 event-based optimization with Lagrangian Relaxation Framework [2-3]
+The physical model is the same with that in [1]. The __object function__ is:  
+![LRF1](./images/HVAC_Optimization_Survey/LRF1.png)  
+where the __expectation__ is over the uncertain outside temperatures and numbers of occupants. The means and variances of the uncertainties are obtained by the data.  
+
+The __constraints__ are:  
+1. The summation of cooling power of the FAU (fresh air unit) and FCUs (fan coil units) should be less than or equal to the capacity limit.
+![LRF2](./images/HVAC_Optimization_Survey/LRF2.png)
+2. System physics dynamics (heat, CO2, humidity)
+3. Human comfort
+![LRF3](./images/HVAC_Optimization_Survey/LRF3.png)  
+
+The __decision variables__ are: fresh air flow rate, FAU outlet air temperature, FCU air flow rate, and FCU outlet air temperature
+
+
+__Key idea:__ In order to obtain a near-optimal solution, it divides the entire problem into subproblems each related to one room and also forms a high-level problem to coordinate all rooms.  
+__Difficulty:__ This kind of methods requires the original problem to be separable. The problem is not separable because: 1) the FAU is shared by all rooms and its decision variable, $T_{FAU}^k$ FAU outlet air temperature, cannot be determined by individual rooms and 2) the FAU fan power $P_{fan,FAU}$ is nonlinear to the sum of fresh air flow rates to all rooms.  
+
+__Solution 1 [2] (subproblem is solved by using backward stochastic dynamic programming):__  
+1. Introduce new desicion variables, $T_{FAU,i}^k$ fresh air temperatures supplied by FAU to I individual rooms at time k  
+2. and add some extra constraints. 
+![LRF4](./images/HVAC_Optimization_Survey/LRF4.png)
+3. surrogate optimization framework [4] and Lagrangian Relaxation is used to decompose the original problem into multiple subproblems. The subproblem is:  
+![LRF5](./images/HVAC_Optimization_Survey/LRF5.png)
+4. The subproblem solutions are coordinated tthrough the iterative updating of the multipliers to maximize the high-level dual function [4]:
+![LRF6](./images/HVAC_Optimization_Survey/LRF6.png)
+5. Subproblem solution may be not satisfied the coupled constraints. So two heuristics have been developed. 1) If the sum of cooling power of FAU and FCUs exceeds the capacity, Use precooling to decrease the cooling demand of this time interval; 2) if the FACU fresh air temperatures required by all rooms are not the same, then ll the FAU outlet fresh air temperature is set to the minimum of the required temperatures. 
+
+__Solution 2 [3] (subproblem is solved by using event-based approaches):__  
+
+5. Step 1-4 are the same with that in Solution 1. The subproblem is solved by using event-based approaches. The optimal policy is nonstationary because the underlying process is nonstationary due to the nonstationary uncertainties in outside temperature and numbers of occupants, and also because the objective is a function of time-varying electricity prices. (Why? The size of the non-stationary policy space is usually extremely large, and it is time consuming to obtain the optimal policy in the nonstationary policy space)  
+6. An augmented state variable is proposed to convert the non-stationary object function into stationary. The augmented state variable is:
+![LRF7](./images/HVAC_Optimization_Survey/LRF7.png)  
+Then we can define the on time-dependent event as:
+![LRF8](./images/HVAC_Optimization_Survey/LRF8.png) 
+7. Q-learning algorithm is used to find the optimal action (optimal policy)
+![LRF9](./images/HVAC_Optimization_Survey/LRF9.png)  
+Then the optimal action should be:  
+![LRF10](./images/HVAC_Optimization_Survey/LRF10.png) 
+
+__Advantages:__  
+1. provide a way to decompose a complex problem into multiple subproblem. Very computation-effcient.
+2. provide two heuristics to guarantee the solutions are feasible to the original problem. 
+3. provide an augmented state variable to convert the nonstationary problem into stationary problem.
+
+__Drawbacks:__  
+1. for MDP-based method, it can only get the 
+near-optimal solution
+2. it didn't give the distance between the near-optimal solution and the optimal solution.
+3. All elements in the state vector is discreted
+4. It requierd next M hours information to keep the problem stationary
+
+#### 2.1.2 Hamilton-Jacobi-Bellman (HJB) equation [5-8]
 __Theory:__  
 Details can be find in:  
 1. https://person.zju.edu.cn/person/attachments/2016-12/07-1481620132-702955.pdf (proof)
@@ -108,7 +162,7 @@ __Algorithm (model free):__
 ![HJB6](./images/HVAC_Optimization_Survey/HJB6.png) 
 
 ### 2.2 EA-based (进化算法)
-#### 2.2.1 Self-adaptive differential evolutionary algorithm (SADE) [6]
+#### 2.2.1 Self-adaptive differential evolutionary algorithm (SADE) [9]
 ![SADE](./images/HVAC_Optimization_Survey/SADE.png)  
 __Advantages:__  
 1. 良好的收敛性
@@ -120,7 +174,7 @@ https://vlight.me/2018/04/17/differential-evolution/
 2. it didn't give the distance between the near-optimal solution and the optimal solution.
 
 ### 2.3 MPC-based
-#### 2.3.1 convex approach (relaxation) [7]
+#### 2.3.1 convex approach (relaxation) [10]
 use convex envelope to replace the bilinear or fractional terms  
 ![model3-1](./images/HVAC_Optimization_Survey/model31.png) 
 ![model3-2](./images/HVAC_Optimization_Survey/model31_2.png)
@@ -132,7 +186,7 @@ __Drawbacks:__
 1. The accuracy degree of the approximation of the original non-convex optimization problem by a convex one may be very case dependent.
 
 
-## 3. Thermal comfort model [8]
+## 3. Thermal comfort model [11]
 ### 3.1 Heat balance models
 1. Predicted mean vote (PMV) and predicted percentage of dissatisfied (PPD)
 ### 3.2 Adaptive models
@@ -142,10 +196,14 @@ __Drawbacks:__
 
 ## References
 [1] Wu, Zijian, Qing-Shan Jia, and Xiaohong Guan. "Optimal control of multiroom HVAC system: An event-based approach." IEEE Transactions on Control Systems Technology 24.2 (2015): 662-669.
-[2] Baldi, Simone, et al. "Model-based and model-free “plug-and-play” building energy efficient control." Applied Energy 154 (2015): 829-841.
-[3] Korkas, Christos D., et al. "Intelligent energy and thermal comfort management in grid-connected microgrids with heterogeneous occupancy schedule." Applied Energy 149 (2015): 194-203.
-[4] Korkas, Christos D., et al. "Occupancy-based demand response and thermal comfort optimization in microgrids with renewable energy sources and energy storage." Applied Energy 163 (2016): 93-104.
-[5] Michailidis, Iakovos T., et al. "Improving energy savings and thermal comfort in large-scale buildings via adaptive optimization." Control Theory: Perspectives, Applications and Developments. Nova Science Publishers, 2015. 315-335.
-[6] Wang, Xinli, Wenjian Cai, and Xiaohong Yin. "A global optimized operation strategy for energy savings in liquid desiccant air conditioning using self-adaptive differential evolutionary algorithm." Applied energy 187 (2017): 410-423.
-[7] Atam, Ercan, and Lieve Helsen. "A convex approach to a class of non-convex building HVAC control problems: Illustration by two case studies." Energy and Buildings 93 (2015): 269-281.
-[8] Yang, Liu, Haiyan Yan, and Joseph C. Lam. "Thermal comfort and building energy consumption implications–a review." Applied energy 115 (2014): 164-173. 
+[2] Sun, Biao, et al. "Building energy management: Integrated control of active and passive heating, cooling, lighting, shading, and ventilation systems." IEEE Transactions on automation science and engineering 10.3 (2012): 588-602.
+[3] Sun, Biao, et al. "Event-based optimization within the Lagrangian relaxation framework for energy savings in HVAC systems." IEEE Transactions on Automation Science and Engineering 12.4 (2015): 1396-1406.
+[4] Zhao, Xing, Peter B. Luh, and Jihua Wang. "Surrogate gradient algorithm for Lagrangian relaxation." Journal of optimization Theory and Applications 100.3 (1999): 699-712.
+[5] Baldi, Simone, et al. "Model-based and model-free “plug-and-play” building energy efficient control." Applied Energy 154 (2015): 829-841.
+[6] Korkas, Christos D., et al. "Intelligent energy and thermal comfort management in grid-connected microgrids with heterogeneous occupancy schedule." Applied Energy 149 (2015): 194-203.
+[7] Korkas, Christos D., et al. "Occupancy-based demand response and thermal comfort optimization in microgrids with renewable energy sources and energy storage." Applied Energy 163 (2016): 93-104.
+[8] Michailidis, Iakovos T., et al. "Improving energy savings and thermal comfort in large-scale buildings via adaptive optimization." Control Theory: Perspectives, Applications and Developments. Nova Science Publishers, 2015. 315-335.
+[9] Wang, Xinli, Wenjian Cai, and Xiaohong Yin. "A global optimized operation strategy for energy savings in liquid desiccant air conditioning using self-adaptive differential evolutionary algorithm." Applied energy 187 (2017): 410-423.
+[10] Atam, Ercan, and Lieve Helsen. "A convex approach to a class of non-convex building HVAC control problems: Illustration by two case studies." Energy and Buildings 93 (2015): 269-281.
+[11] Yang, Liu, Haiyan Yan, and Joseph C. Lam. "Thermal comfort and building energy consumption implications–a review." Applied energy 115 (2014): 164-173. 
+

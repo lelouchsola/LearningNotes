@@ -8,3 +8,5 @@
 4. Low S H. Convex relaxation of optimal power flow—Part I: Formulations and equivalence[J]. IEEE Transactions on Control of Network Systems, 2014, 1(1): 15-27.
 5. Afroz, Zakia, et al. "Modeling techniques used in building HVAC control systems: A review." Renewable and Sustainable Energy Reviews 83 (2018): 64-84.
 6. Afram, Abdul, et al. "Artificial neural network (ANN) based model predictive control (MPC) and optimization of HVAC systems: A state of the art review and case study of a residential HVAC system." Energy and Buildings 141 (2017): 96-113.
+7. Korkas, Christos D., et al. "Occupancy-based demand response and thermal comfort optimization in microgrids with renewable energy sources and energy storage." Applied Energy 163 (2016): 93-104.
+8. Vandermeulen, Annelies, Bram van der Heijde, and Lieve Helsen. "Controlling district heating and cooling networks to unlock flexibility: A review." Energy 151 (2018): 103-115.
