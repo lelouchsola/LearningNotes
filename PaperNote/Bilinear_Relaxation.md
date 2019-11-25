@@ -29,5 +29,26 @@ It is infeasible to compute the infinite sums over all integers, we represent $v
 ![9](./images/Bilinear_Relaxation/9.png)  
 where $l \in L = \{p, p+1,..., P\}$
 #### 1.4 Lower bounding
-Introduce a slack variable $\delta$
+Introduce a slack variable $\Delta x_j$ such that $x^R_j=x_j'+\Delta x_j$. $x_j'$ is the discretized representation, $x_j^R$ is the continous representation.  
+![10](./images/Bilinear_Relaxation/10.png)  
+The slack variable $\Delta w$ replaces the bilinear term that can be relaxed using McCormick envelope. Because $u^L \leq u \leq u^U$ and $0 \leq \Delta v \leq 10^P$:   
+![11](./images/Bilinear_Relaxation/11.png)  
+![12](./images/Bilinear_Relaxation/12.png)  
+#### 1.5 New optimization problem
+![13](./images/Bilinear_Relaxation/13.png)  
 ### 2. Piecewise McCormick envelopes (PCM)
+#### 2.1 Objective function
+![14](./images/Bilinear_Relaxation/14.png)  
+#### 2.2 Constraints
+![15](./images/Bilinear_Relaxation/15.png)  
+#### 2.3 disjunctive bounds
+![16](./images/Bilinear_Relaxation/16.png)  
+#### 2.4 Remarks
+1. In this optimization form, $x_j$ is selected as discreted variable. Each discreted variable corresponds a $x_j$ and $y_{jn}$. 
+2. Each bilinear term $w_{ij}$ corresponds a $x_{ijn}$. 
+### 3. Benchmark problems and Codes
+#### 3.1 Problem 1
+![17](./images/Bilinear_Relaxation/17.png)  
+#### 3.2 MDT for problem 1
+
+#### 3.3 PCM for problem 1
